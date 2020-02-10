@@ -1,0 +1,21 @@
+label{
+    font-weight: 600;
+}
+
+#ventana{
+    background-color: rgba(30, 30, 30, 0.9);
+    padding: 20px;
+    border-radius: 2%;
+    color: #fff;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+}
+
+.card-title{
+    text-align: center;
+}
+
+.btn-danger{
+    float: right;
+}

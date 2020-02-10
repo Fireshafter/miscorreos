@@ -1,0 +1,27 @@
+<div id="ventana" class="col col-md-4">
+  <h5 class="card-title" *ngIf="nuevoCorreo.value.titulo==''">Nuevo correo</h5>
+  <h5 class="card-title" *ngIf="nuevoCorreo.value.titulo">{{nuevoCorreo.value.titulo}}</h5>
+  <form class="container" [formGroup]="nuevoCorreo">
+    <div class="form-group">
+      <label>Asunto</label>
+      <input type="text" formControlName="titulo" required="required" class="form-control" placeholder="Introduce el asunto" />
+      <small *ngIf="formulario.titulo.errors?.required && submitted" class="form-text text-danger">No puedes dejar este campo vacio.</small>
+    </div>
+    <div class="form-group">
+      <label> Destinatario</label>
+      <input type="email" formControlName="destinatario" required="required" class="form-control" placeholder="Enter email" />
+      <small *ngIf="formulario.destinatario.errors?.required && submitted" class="form-text text-danger">No puedes dejar este campo vacio.</small>
+      <small *ngIf="formulario.destinatario.errors?.email && submitted" class="form-text text-danger">{{nuevoCorreo.value.destinatario}} no es un correo válido.</small>
+    </div>
+    <div class="form-group">
+      <label>Mensaje</label>
+      <textarea class="form-control" formControlName="cuerpo" rows="6"></textarea>
+      <small *ngIf="formulario.cuerpo.errors?.required && submitted" class="form-text text-danger">No puedes dejar este campo vacio.</small>
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary" (click)="enviar()">Enviar</button>
+      <button class="btn btn-danger" (click)="close()">Cancelar</button>
+    </div>
+  </form>
+</div>
