@@ -1,21 +1,23 @@
-<table class="table table-sm table-hover">
+<div class="container-fluid">
+  <table class="table table-sm table-hover">
     <thead class="thead-dark">
       <tr>
         <th scope="col">Emisor</th>
         <th scope="col">Asunto</th>
-        <th scope="col">Cuerpo</th>
+        <th scope="col">Mensaje</th>
         <th scope="col">Enviado</th>
         <th scope="col">Leído</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let correo of correos" [ngClass]="{'unread': !correo.leido}">
-        <td>{{correo.emisor}}</td>
-        <th>{{correo.asunto}}</th>
-        <td>{{correo.cuerpo.substring(0, 100)}}...</td>
-        <td>{{correo.enviado.seconds*1000 | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
-        <td *ngIf="correo.leido">✔️</td>
-        <td *ngIf="!correo.leido">❌</td>
+      <tr *ngFor="let correo of correos" [ngClass]="{'unread': !correo.leido}" (click)="verDetalle(correo.id)">
+        <td class="text-truncate">{{correo.emisor}}</td>
+        <th class="text-truncate">{{correo.asunto}}</th>
+        <td class="text-truncate">{{correo.cuerpo}}</td>
+        <td class="text-truncate">{{correo.enviado.seconds*1000 | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
+        <td *ngIf="correo.leido" class="text-truncate">✔️</td>
+        <td *ngIf="!correo.leido" class="text-truncate">❌</td>
       </tr>
     </tbody>
   </table>
+</div>

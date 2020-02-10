@@ -1,16 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore'
 import { Observable } from 'rxjs'
-
-interface Correo {
-  asunto: String;
-  emisor: String;
-  receptor: String;
-  cuerpo: String;
-  leido: Boolean;
-  enviado: Date;
-  id?: String;
-}
+import { Correo } from '../../interfaces/correo'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-correos',
@@ -23,21 +15,25 @@ export class ListaCorreosComponent implements OnInit {
   correos$: Observable<Correo[]>;
   correos = [];
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private router:Router) { }
 
   ngOnInit() {
     this.correosCollection = this.afs.collection('correos', ref => {
       return ref.orderBy('enviado', 'desc');
     });
-    this.correos$ = this.correosCollection.valueChanges();
+    this.correos$ = this.correosCollection.valueChanges({idField: 'id'});
     
     this.correos$.forEach((correo) => {
       this.correos = correo;
+      console.log(correo);
+      
     })
+    
 
-    console.log(this.correos);
-    
-    
+  }
+
+  verDetalle(idcorreo){
+    this.router.navigate(['/correo/', {correo: idcorreo}]);
   }
 
 }

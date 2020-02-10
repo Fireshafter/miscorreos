@@ -1,2 +1,6 @@
-<p>{{correoid}}</p>
-
+<div class="container">
+    <h4>{{(correo$|async)?.asunto}}</h4>
+    <p><strong *ngIf="(correo$|async)?.emisor.split('@')[0] as emisor">{{emisor[0].toUpperCase() + emisor.substring(1)}} </strong><span class="text-secondary">&lt;{{(correo$|async)?.emisor}}&gt;</span></p>
+    <hr />
+    <p>{{(correo$|async)?.cuerpo}}</p>
+</div>
